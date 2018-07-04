@@ -1,4 +1,4 @@
-'drop database j2c
+drop database j2c
 create database j2c
 use j2c;
 
