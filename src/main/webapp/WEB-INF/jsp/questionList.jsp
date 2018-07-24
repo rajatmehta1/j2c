@@ -29,9 +29,6 @@
 
 <div class="container">
 
-
-
-
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
@@ -71,18 +68,26 @@
         </nav>
     </div>
 
-
+    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+        <strong>Join2Cure</strong> is your resource for all your health related queries @India.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
     <!--
     <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <button type="button" class="close text-right" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
         <div class="col-md-6 px-0">
-            <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
             <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
             <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
         </div>
     </div>
+    -->
 
-
+<!--
     <div class="row mb-2">
         <div class="col-md-6">
             <div class="card flex-md-row mb-4 box-shadow h-md-250">
@@ -119,71 +124,66 @@
     <div class="control-group">
         &nbsp;
     </div>
-<main role="main" class="container">
-    <div class="row">
-        <div class="col-md-8 blog-main">
+    <main role="main" class="container">
 
-            <h4 class="pb-3 mb-4 border-bottom">
-                ${question.qsTxt}
-            </h4>
+        <div class="row">
 
-                <c:forEach items="${question.ansList}" var="qAns">
-                    <div>
-                        <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                            <c:out value="${qAns.ansTxt}" escapeXml="false"/>
-                        <hr>
+            <aside class="col-md-3 blog-sidebar">
+
+                <div class="p-3 bg-white">
+
+                    <h6 class="border-bottom">Topics</h6>
+                    <ol class="list-unstyled mb-0">
+                        <c:forEach items="${topics}" var="topic">
+                            <li><a href="/j2c/topic/${topic.topicId}/questionsList" class="text-dark">${topic.topicName}</a></li>
+                            <li>&nbsp;</li>
+                        </c:forEach>
+                    </ol>
+
+                </div>
+
+                <div class="p-3">
+                    <a class="btn btn-sm btn-success" href="#" data-toggle="modal" data-target="#exampleModal">+ Ask a Question</a>
+                </div>
+            </aside><!-- /.blog-sidebar -->
+
+
+            <div class="col-md-9 blog-main">
+
+                <c:forEach items="${questions}" var="qs">
+                    <div class="my-3 p-3 bg-white rounded box-shadow">
+                        <h6 class="border-bottom border-gray pb-2 mb-0"><font color="black"><a href="/j2c/question/${qs.id}" class="text-dark">${qs.qsTxt}</a></font></h6>
+                        <div class="media text-muted pt-3">
+                                <c:out value="${qs.firstAnswer.ansTxt}" escapeXml="false"/>
+                        </div>
+                        <small class="d-block text-right mt-3">
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                <strong class="d-block text-gray-dark">January 1, 2014 by @mark</strong>
+                            </p>
+                        </small>
+                        <small class="d-block text-right mt-3">
+                            <a href="/j2c/question/${qs.id}">All Answers</a>
+                        </small>
                     </div>
                 </c:forEach>
 
-            <nav class="blog-pagination">
-                <a class="btn btn-outline-primary" href="#">Older</a>
-                <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-            </nav>
+                <nav class="blog-pagination">
+                    <a class="btn btn-outline-primary" href="#">Older</a>
+                    <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+                </nav>
 
-        </div><!-- /.blog-main -->
+            </div><!-- /.blog-main -->
 
-        <aside class="col-md-4 blog-sidebar">
-            <div>
-                <button class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target=".bd-example-modal-lg">Answer</button>
-            </div>
 
-            <div>
-                <span>&nbsp;</span>
-            </div>
+        </div><!-- /.row -->o
+    </main><!-- /.container -->
 
-            <div class="p-3">
-
-                <h6 class="border-bottom">Related Questions</h6>
-                <ol class="list-unstyled mb-0">
-                    <li><a href="#">Has insulin some side defects ?</a></li>
-                    <li>&nbsp;</li>
-                    <li><a href="#">What is the effect of diabetes on teeth?</a></li>
-                    <li>&nbsp;</li>
-                    <li><a href="#">What affect does diabetes have for cataract operation ?</a></li>
-                    <li>&nbsp;</li>
-                    <li><a href="#">December 2013</a></li>
-                    <li>&nbsp;</li>
-                    <li><a href="#">November 2013</a></li>
-                    <li>&nbsp;</li>
-                    <li><a href="#">April 2013</a></li>
-                </ol>
-
-            </div>
-
-            <div class="p-3">
-                <a class="btn btn-sm btn-success" href="#" data-toggle="modal" data-target="#exampleModal">+ Ask a Question</a>
-            </div>
-        </aside><!-- /.blog-sidebar -->
-
-    </div><!-- /.row -->o
-</main><!-- /.container -->
-
-<footer class="blog-footer">
-    <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-    <p>
-        <a href="#">Back to top</a>
-    </p>
-</footer>
+    <footer class="blog-footer">
+        <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        <p>
+            <a href="#">Back to top</a>
+        </p>
+    </footer>
 
     <!--  Add User Modal -->
 
@@ -265,7 +265,7 @@
                     </button>
                 </div>
                 <form:form action="/j2c/addQuestion" method="post" modelAttribute="qst">
-                <div class="modal-body">
+                    <div class="modal-body">
 
 
                         <div class="form-group">
@@ -284,11 +284,11 @@
                             </form:select>
                         </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-secondary" value="Submit" />
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-secondary" value="Submit" />
+                    </div>
                 </form:form>
             </div>
         </div>
@@ -381,33 +381,33 @@
                 </form:form>
                 <script>
                     $('#summernote').summernote({
-                        placeholder: 'Enter your answer here',
+                        placeholder: 'Hello bootstrap 4',
                         tabsize: 2,
-                        height: 300
+                        height: 100
                     });
                 </script>
             </div>
         </div>
     </div>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="/assets/js/vendor/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/assets/js/vendor/holder.min.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="/assets/js/vendor/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/assets/js/vendor/holder.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 
-<script>
-    Holder.addTheme('thumb', {
-        bg: '#55595c',
-        fg: '#eceeef',
-        text: 'Thumbnail'
-    });
-</script>
+    <script>
+        Holder.addTheme('thumb', {
+            bg: '#55595c',
+            fg: '#eceeef',
+            text: 'Thumbnail'
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('#summernote').summernote();

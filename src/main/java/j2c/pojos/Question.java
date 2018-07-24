@@ -6,12 +6,22 @@ public class Question {
 
     private Integer id;
     private String qsTxt;
+    private Integer topicId;
     private List<Answer> ansList;
     private List<Comment> cmtList;
     private List<Question> relQList;
+    private Integer createdBy;
+    private Answer firstAnswer;
 
     public Question() {
 
+    }
+
+    public Question(int qid, String q_text, int topic_id, int created_by) {
+        this.id = qid;
+        this.qsTxt = q_text;
+        this.topicId = topic_id;
+        this.createdBy = created_by;
     }
 
     public Integer getId() {
@@ -52,5 +62,29 @@ public class Question {
 
     public void setRelQList(List<Question> relQList) {
         this.relQList = relQList;
+    }
+
+    public Integer getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(Integer topicId) {
+        this.topicId = topicId;
+    }
+
+    public Integer getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Integer createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Answer getFirstAnswer() {
+        return firstAnswer;
+    }
+
+    public void setFirstAnswer(Answer firstAnswer) {
+        this.firstAnswer = firstAnswer;
     }
 }

@@ -27,11 +27,10 @@ use j2c;
 
   CREATE TABLE users (
      user_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-     user_name VARCHAR(10) NULL,
      pwd VARCHAR(10) NULL,
-     email VARCHAR(50) NULL,
-     updated_by VARCHAR(25) NOT NULL,
-     update_time DATE,
+     email VARCHAR(255) NULL,
+     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+     is_active CHAR(1) NOT NULL,
      primary key(user_id)
   );
 
@@ -57,9 +56,8 @@ insert into topics(topic_id,topic_name) value(1,'Diabetes');
 insert into topics(topic_id,topic_name) value(2,'Pregnancy');
 insert into topics(topic_id,topic_name) value(3,'General Health');
 insert into topics(topic_id,topic_name) value(4,'Mental Health');
-insert into topics(topic_id,topic_name) value(5,'Heart');
-insert into topics(topic_id,topic_name) value(6,'Lung_Respiratory');
-
+insert into topics(topic_id,topic_name) value(5,'Heart Disease');
+insert into topics(topic_id,topic_name) value(6,'Lungs Disease');
 
 
   -- Category
@@ -70,6 +68,7 @@ insert into topics(topic_id,topic_name) value(6,'Lung_Respiratory');
      topic_id INT,
      PRIMARY KEY  (stopic_id)
   );
+
 
 insert into sub_topics(stopic_id,stopic_name,topic_id) value(1,'Diabetes_general',1);
 insert into sub_topics(stopic_id,stopic_name,topic_id) value(2,'Diabetes_Type1',1);

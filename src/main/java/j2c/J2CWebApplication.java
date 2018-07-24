@@ -7,7 +7,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "j2c.controllers")
+@ComponentScan(basePackages = {"j2c.controllers","j2c.daos","j2c.test"})
 public class J2CWebApplication  extends SpringBootServletInitializer {
 
     @Override
