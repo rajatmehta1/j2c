@@ -2,7 +2,7 @@ package j2c.pojos;
 
 public class Answer {
     private Integer id;
-    private String ansTxt = " ";
+    private String ansTxt = "Enter your reply here ...";
     private int order;
     private Integer questionId;
     private Integer createdBy;
