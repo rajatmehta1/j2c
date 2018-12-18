@@ -4,9 +4,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@EnableCaching
 @ComponentScan(basePackages = {"j2c.controllers","j2c.daos","j2c.test"})
 public class J2CWebApplication  extends SpringBootServletInitializer {
 

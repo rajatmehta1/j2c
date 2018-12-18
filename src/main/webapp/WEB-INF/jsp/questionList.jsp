@@ -11,17 +11,7 @@
 
     <title>Health@India</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- Custom styles for this template -->
-    <link href="/css/f.css" rel="stylesheet" />
-    <link href="/css/blog.css" rel="stylesheet" />
-
-
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
-
+    <%@ include file = "inc_head.jsp" %>
 
 </head>
 
@@ -135,7 +125,7 @@
                     <h6 class="border-bottom">Topics</h6>
                     <ol class="list-unstyled mb-0">
                         <c:forEach items="${topics}" var="topic">
-                            <li><a href="/j2c/topic/${topic.topicId}/questionsList" class="text-dark">${topic.topicName}</a></li>
+                            <li><a href="/j2c/j2c/topic/${topic.topicId}/questionsList" class="text-dark">${topic.topicName}</a></li>
                             <li>&nbsp;</li>
                         </c:forEach>
                     </ol>
@@ -152,17 +142,17 @@
 
                 <c:forEach items="${questions}" var="qs">
                     <div class="my-3 p-3 bg-white rounded box-shadow">
-                        <h6 class="border-bottom border-gray pb-2 mb-0"><font color="black"><a href="/j2c/question/${qs.id}" class="text-dark">${qs.qsTxt}</a></font></h6>
+                        <h6 class="border-bottom border-gray pb-2 mb-0"><font color="black"><a href="/j2c/j2c/question/${qs.id}" class="text-dark">${qs.qsTxt}</a></font></h6>
                         <div class="media text-muted pt-3">
                                 <c:out value="${qs.firstAnswer.ansTxt}" escapeXml="false"/>
                         </div>
                         <small class="d-block text-right mt-3">
                             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                                <strong class="d-block text-gray-dark">January 1, 2014 by @mark</strong>
+                                <strong class="d-block text-gray-dark">January 1, 2014 by @tendulkar</strong>
                             </p>
                         </small>
                         <small class="d-block text-right mt-3">
-                            <a href="/j2c/question/${qs.id}">All Answers</a>
+                            <a href="/j2c/j2c/question/${qs.id}">All Answers</a>
                         </small>
                     </div>
                 </c:forEach>
@@ -179,120 +169,22 @@
     </main><!-- /.container -->
 
     <footer class="blog-footer">
-        <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        <p>Built by SOL-Ventures</p>
         <p>
             <a href="#">Back to top</a>
         </p>
     </footer>
 
     <!--  Add User Modal -->
-
-    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="userModalLabel">Sign Up</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form:form action="/j2c/addUser" method="post" modelAttribute="usr">
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <form:input path="email" class="form-control" id="email"></form:input>
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Password</label>
-                            <form:password path="pwd" class="form-control" id="pwd"></form:password>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-secondary" value="Submit" />
-                    </div>
-                </form:form>
-            </div>
-        </div>
-    </div>
+    <%@ include file = "inc_add_user.jsp" %>
     <!-- End add user modal -->
 
     <!--  Add login Modal -->
-
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Sign Up</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form:form action="/j2c/auth" method="post" modelAttribute="usr">
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="email2">Email</label>
-                            <form:input path="email" class="form-control" id="email2"></form:input>
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd2">Password</label>
-                            <form:password path="pwd" class="form-control" id="pwd2"></form:password>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-secondary" value="Submit" />
-                    </div>
-                </form:form>
-            </div>
-        </div>
-    </div>
+    <%@ include file = "inc_login.jsp" %>
     <!-- End login modal -->
 
     <!--  Add Question Modal -->
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ask a Question</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form:form action="/j2c/addQuestion" method="post" modelAttribute="qst">
-                    <div class="modal-body">
-
-
-                        <div class="form-group">
-                            <label for="qsTxt">Question Text</label>
-                            <form:textarea path="qsTxt" class="form-control" id="qsTxt" rows="3"></form:textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect2">Topic</label>
-                            <form:select class="form-control" id="exampleFormControlSelect2" path="topicId">
-                                <option>Select</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </form:select>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-secondary" value="Submit" />
-                    </div>
-                </form:form>
-            </div>
-        </div>
-    </div>
+    <%@ include file = "inc_add_question.jsp" %>
     <!-- End add question modal -->
 
 
@@ -307,7 +199,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form:form action="/j2c/addAnswer" method="post" modelAttribute="ans">
+                <form:form action="/j2c/j2c/addAnswer" method="post" modelAttribute="ans">
                     <form:input path="questionId" type="hidden" name="questionId" value="${question.id}"/>
                     <div class="modal-body">
 
@@ -390,30 +282,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="/assets/js/vendor/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/assets/js/vendor/holder.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
-
-    <script>
-        Holder.addTheme('thumb', {
-            bg: '#55595c',
-            fg: '#eceeef',
-            text: 'Thumbnail'
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#summernote').summernote();
-        });
-    </script>
-
+    <%@ include file = "inc_tail.jsp" %>
 
 </body>
 </html>

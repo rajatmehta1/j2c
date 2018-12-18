@@ -49,15 +49,16 @@ use j2c;
      topic_id INT UNSIGNED NOT NULL,
      topic_name VARCHAR(255) NOT NULL,
      topic_desc VARCHAR(255),
+     topic_lang VARCHAR(5),
      PRIMARY KEY  (topic_id)
   );
 
-insert into topics(topic_id,topic_name) value(1,'Diabetes');
-insert into topics(topic_id,topic_name) value(2,'Pregnancy');
-insert into topics(topic_id,topic_name) value(3,'General Health');
-insert into topics(topic_id,topic_name) value(4,'Mental Health');
-insert into topics(topic_id,topic_name) value(5,'Heart Disease');
-insert into topics(topic_id,topic_name) value(6,'Lungs Disease');
+insert into topics(topic_id,topic_name,topic_lang) value(1,'Diabetes','en');
+insert into topics(topic_id,topic_name,topic_lang) value(2,'Pregnancy','en');
+insert into topics(topic_id,topic_name,topic_lang) value(3,'General Health','en');
+insert into topics(topic_id,topic_name,topic_lang) value(4,'Mental Health','en');
+insert into topics(topic_id,topic_name,topic_lang) value(5,'Heart Disease','en');
+insert into topics(topic_id,topic_name,topic_lang) value(6,'Lungs Disease','en');
 
 
   -- Category
@@ -66,12 +67,13 @@ insert into topics(topic_id,topic_name) value(6,'Lungs Disease');
      stopic_name VARCHAR(255) NOT NULL,
      stopic_desc VARCHAR(255),
      topic_id INT,
+     topic_lang VARCHAR(5),
      PRIMARY KEY  (stopic_id)
   );
 
 
-insert into sub_topics(stopic_id,stopic_name,topic_id) value(1,'Diabetes_general',1);
-insert into sub_topics(stopic_id,stopic_name,topic_id) value(2,'Diabetes_Type1',1);
-insert into sub_topics(stopic_id,stopic_name,topic_id) value(3,'Diabetes_Type2',1);
+insert into sub_topics(stopic_id,stopic_name,topic_id,topic_lang) value(1,'Diabetes_general',1,'en');
+insert into sub_topics(stopic_id,stopic_name,topic_id,topic_lang) value(2,'Diabetes_Type1',1,'en');
+insert into sub_topics(stopic_id,stopic_name,topic_id,topic_lang) value(3,'Diabetes_Type2',1,'en');
 
 

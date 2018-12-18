@@ -1,0 +1,6 @@
+
+1. Connectivity to mysql local
+
+   a) start mysqld with no argumentss
+   b) mysql -u root -p j2c
+      now type password as 'admin'
