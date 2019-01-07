@@ -125,7 +125,7 @@
                     <h6 class="border-bottom">Topics</h6>
                     <ol class="list-unstyled mb-0">
                         <c:forEach items="${topics}" var="topic">
-                            <li><a href="/j2c/j2c/topic/${topic.topicId}/questionsList" class="text-dark">${topic.topicName}</a></li>
+                            <li><a href="/j2c/topic/${topic.topicId}/questionsList" class="text-dark">${topic.topicName}</a></li>
                             <li>&nbsp;</li>
                         </c:forEach>
                     </ol>
@@ -142,7 +142,7 @@
 
                 <c:forEach items="${questions}" var="qs">
                     <div class="my-3 p-3 bg-white rounded box-shadow">
-                        <h6 class="border-bottom border-gray pb-2 mb-0"><font color="black"><a href="/j2c/j2c/question/${qs.id}" class="text-dark">${qs.qsTxt}</a></font></h6>
+                        <h6 class="border-bottom border-gray pb-2 mb-0"><font color="black"><a href="/j2c/question/${qs.id}" class="text-dark">${qs.qsTxt}</a></font></h6>
                         <div class="media text-muted pt-3">
                                 <c:out value="${qs.firstAnswer.ansTxt}" escapeXml="false"/>
                         </div>
@@ -152,7 +152,7 @@
                             </p>
                         </small>
                         <small class="d-block text-right mt-3">
-                            <a href="/j2c/j2c/question/${qs.id}">All Answers</a>
+                            <a href="/j2c/question/${qs.id}">All Answers</a>
                         </small>
                     </div>
                 </c:forEach>
@@ -199,7 +199,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form:form action="/j2c/j2c/addAnswer" method="post" modelAttribute="ans">
+                <form:form action="/j2c/addAnswer" method="post" modelAttribute="ans">
                     <form:input path="questionId" type="hidden" name="questionId" value="${question.id}"/>
                     <div class="modal-body">
 
