@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 
 /*
@@ -22,24 +24,45 @@ public class QuestionListController {
     QuestionListDao qlDao;
 
 
-
     @RequestMapping("/j2c")
-    public String getQuestionList(Model model) {
+    public String getQuestionList(@RequestParam(name="lang") String lang, Model model) {
+
+        if(null == lang)
+            lang = "en";
         List<Question> ql =
-                qlDao.findQuestions(true);
+                qlDao.findQuestions( true);
 //        for (Question q:ql
 //             ) {
 //            System.out.println(" ------> " + q.getQsTxt());
 //
 //        }
         List<Topic> topics = qlDao.findTopics();
-        model.addAttribute("questions", ql);
-        model.addAttribute("qst",new Question());
-        model.addAttribute("ans",new Answer());
-        model.addAttribute("usr",new User());
-        model.addAttribute("topics",topics);
+            model.addAttribute("questions", ql);
+            model.addAttribute("qst",new Question());
+            model.addAttribute("ans",new Answer());
+            model.addAttribute("usr",new User());
+            model.addAttribute("topics",topics);
         return "questionList";
     }
+
+//OLD Deprecated.
+//    @RequestMapping("/j2c")
+//    public String getQuestionList(Model model) {
+//        List<Question> ql =
+//                qlDao.findQuestions(true);
+////        for (Question q:ql
+////             ) {
+////            System.out.println(" ------> " + q.getQsTxt());
+////
+////        }
+//        List<Topic> topics = qlDao.findTopics();
+//        model.addAttribute("questions", ql);
+//        model.addAttribute("qst",new Question());
+//        model.addAttribute("ans",new Answer());
+//        model.addAttribute("usr",new User());
+//        model.addAttribute("topics",topics);
+//        return "questionList";
+//    }
 
     @RequestMapping("/j2c/topic/{topicId}/questionsList")
     public String getQuestionList(@PathVariable int topicId, Model model) {
