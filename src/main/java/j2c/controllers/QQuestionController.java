@@ -99,23 +99,23 @@ public class QQuestionController {
         return "Stored in Cache";
     }
 
-
-    @RequestMapping(value="/j2c/addBulkExternal", method = RequestMethod.POST)
-    public String addBulkQuestions(@ModelAttribute("qex") QuestionExtractor qst, Model model) throws Exception {
-        HashMap<String, String> qsMap = qlistDao.getAllQuestions();
-        Question q = QExtractor.getQuestionsFromQuora(qst.getQuestionUrl());
-            q.setTopicId(1);
-            q.setCreatedBy(2);
-            int qid = qdao.insertWithKey(q);
-
-            for(Answer ans : q.getAnsList()) {
-                ans.setQuestionId(qid);
-                ans.setCreatedBy(2);
-                qdao.insertAnswer(ans);
-            }
-            return showExtractLink(model);
-
-    }
+//
+//    @RequestMapping(value="/j2c/addBulkExternal", method = RequestMethod.POST)
+//    public String addBulkQuestions(@ModelAttribute("qex") QuestionExtractor qst, Model model) throws Exception {
+//        HashMap<String, String> qsMap = qlistDao.getAllQuestions();
+//        Question q = QExtractor.getQuestionsFromQuora(qst.getQuestionUrl());
+//            q.setTopicId(1);
+//            q.setCreatedBy(2);
+//            int qid = qdao.insertWithKey(q);
+//
+//            for(Answer ans : q.getAnsList()) {
+//                ans.setQuestionId(qid);
+//                ans.setCreatedBy(2);
+//                qdao.insertAnswer(ans);
+//            }
+//            return showExtractLink(model);
+//
+//    }
 
 
     //working store builk questions method.

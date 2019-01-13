@@ -12,6 +12,8 @@ public class Question {
     private List<Question> relQList;
     private Integer createdBy;
     private Answer firstAnswer;
+    private String qlink;
+    private String questionUrl;
 
     public Question() {
 
@@ -86,5 +88,21 @@ public class Question {
 
     public void setFirstAnswer(Answer firstAnswer) {
         this.firstAnswer = firstAnswer;
+    }
+
+    public String getQlink() {
+        return qlink;
+    }
+
+    public void setQlink(String qlink) {
+        this.qlink = qlink;
+    }
+
+    public String getQuestionUrl() {
+        return questionUrl;
+    }
+
+    public void setQuestionUrl(String questionUrl) {
+        this.questionUrl = questionUrl;
     }
 }

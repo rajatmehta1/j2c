@@ -5,10 +5,9 @@ import j2c.pojos.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import javax.xml.transform.Result;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class QuestionDao {
     public void insert(Question q){
 
         String sql = "INSERT INTO q_all " +
-                "(q_text, topic_id, created_by, is_active ) VALUES (?, ?, ?, ?)";
+                "(q_text, topic_id, created_by, is_active,q_link ) VALUES (?, ?, ?, ?, ?)";
         Connection conn = null;
 
         try {
@@ -36,6 +35,7 @@ public class QuestionDao {
             ps.setInt(2, q.getTopicId());
             ps.setInt(3, q.getCreatedBy());
             ps.setString(4, "Y");
+            ps.setString(5, q.getQlink());
             ps.executeUpdate();
             ps.close();
 
@@ -150,7 +150,40 @@ public class QuestionDao {
         }
     }
 
-//    public int insertWithKey(Question q) {
-//    }
+    public int insertWithKey(Question q) {
+        String sql = "INSERT INTO q_all " +
+                "(q_text, topic_id, created_by, is_active ) VALUES (?, ?, ?, ?)";
+        Connection conn = null;
+        int key = -1;
+
+        try {
+            conn = this.jdbcTemplate.getDataSource().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, q.getQsTxt());
+            ps.setInt(2, q.getTopicId());
+            ps.setInt(3, q.getCreatedBy());
+            ps.setString(4, "Y");
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if(rs.next()) {
+                key = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+            }
+        }
+        return key;
+    }
 }
 

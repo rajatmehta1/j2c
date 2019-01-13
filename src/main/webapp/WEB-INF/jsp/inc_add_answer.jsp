@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form:form action="/j2c/j2c/addAnswer" method="post" modelAttribute="ans">
+            <form:form action="/j2c/addAnswer" method="post" modelAttribute="ans">
                 <form:input path="questionId" type="hidden" name="questionId" value="${question.id}"/>
                 <div class="modal-body">
 

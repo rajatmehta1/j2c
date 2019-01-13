@@ -22,7 +22,8 @@
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
-                <a class="blog-post-title text-dark" href="#">Join2Cure</a>
+                <!--<a class="blog-post-title text-dark" href="#">Join2Cure</a>-->
+                <a class="blog-post-title text-dark" href="#"> Sample </a>
             </div>
             <div class="col-4 text-center">
 

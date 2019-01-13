@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form:form action="/j2c/j2c/addQuestion" method="post" modelAttribute="qst">
+            <form:form action="/j2c//addQuestion" method="post" modelAttribute="qst">
                 <div class="modal-body">
 
 

@@ -1,0 +1,1 @@
+C:\mystuff\j2c_infra\mysql-8.0.13-winx64\bin>mysqld --init-file=C:\\mystuff\\j2c_infra\\mysql_init.txt

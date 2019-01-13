@@ -326,4 +326,9 @@ public class QuestionListDao {
         }
     }
 
+    public String getName() {
+        return "qlist dao";
+    }
+
+
 }

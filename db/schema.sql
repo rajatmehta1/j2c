@@ -77,3 +77,14 @@ insert into sub_topics(stopic_id,stopic_name,topic_id,topic_lang) value(2,'Diabe
 insert into sub_topics(stopic_id,stopic_name,topic_id,topic_lang) value(3,'Diabetes_Type2',1,'en');
 
 
+-- Last know batch value
+    CREATE TABLE LAST_KNOWN (
+     lk_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+     qid INT,
+     aid INT,
+     created_by INT,
+     updated_by VARCHAR(25),
+     update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+     is_active CHAR(1) NOT NULL,
+     PRIMARY KEY  (lk_id)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

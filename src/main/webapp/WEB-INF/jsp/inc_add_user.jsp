@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form:form action="/j2c/j2c/addUser" method="post" modelAttribute="usr">
+            <form:form action="/j2c//addUser" method="post" modelAttribute="usr">
                 <div class="modal-body">
 
                     <div class="form-group">
