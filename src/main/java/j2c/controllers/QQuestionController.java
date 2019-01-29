@@ -72,10 +72,10 @@ public class QQuestionController {
 
     @RequestMapping(value = "/j2c/addBulkExternal", method=RequestMethod.POST)
     public String addBulkQuestion(@ModelAttribute("qex") QuestionExtractor qst, Model model) throws Exception {
-        HashMap<String, String> qsMap = qlistDao.getAllQuestions(); // this should be from caj
+        ArrayList<String> qsMap = QExtractor.getBulkUrlsFromQuora(qst.getQuestionUrl());
         //TODO
-        for(String qkey: qsMap.keySet()) {
-            Question q = QExtractor.getQuestionsFromQuora(qsMap.get(qkey));
+        for(String qkey: qsMap) {
+            Question q = QExtractor.getQuestionsFromQuora(qkey);
             q.setTopicId(1); //TODO
             q.setCreatedBy(2); //TODO
             int qid = qdao.insertWithKey(q);
