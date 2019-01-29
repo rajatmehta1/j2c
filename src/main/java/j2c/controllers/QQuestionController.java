@@ -62,7 +62,7 @@ public class QQuestionController {
 
         for(Answer ans: q.getAnsList()) {
             ans.setQuestionId(qid);
-            ans.setCreatedBy(2);//TODO
+            ans.setCreatedBy(1);//TODO
             qdao.insertAnswer(ans);
         }
 

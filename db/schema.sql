@@ -34,7 +34,6 @@ use j2c;
      primary key(user_id)
   );
 
-
   CREATE TABLE q_comments (
      comment_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
      qid INT NOT NULL,

@@ -10,6 +10,11 @@ public class User {
 
     }
 
+    public User(int id, String email) {
+        this.id = id;
+        this.email = email;
+    }
+
     public User(String email) {
         this.email = email;
     }
@@ -44,5 +49,9 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDisplayName() {
+        return email.substring(0, email.indexOf("@"));
     }
 }

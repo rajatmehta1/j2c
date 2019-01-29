@@ -1,30 +1,17 @@
-1.  Hosting in Singalore datacenter of A2hosting.. for tomcat
-    5hrs ----- deploy
+1. Hosting - AWS or A2Hosting
 
-2. elastic search integration for questions and answers...results should bring
-   relevant questions
+2. Elastic search svr deployment on AWS (index name -> J2C
 
-   5hrs
+3. Build a table for related questions page populated by a batch job
 
-3. Related questions based on ML or elastic search
+4. Support for Hindi / Telugu
 
-   * Check Category
-   * key word similarity with other words
+5. Question/Answer Extraction algorithm - single (duplicates avoid)
 
-    5-10 hrs
+6. Share question on facebook / whatsapp integration
 
-4. Integrate office code with house code
-   1. Upload from Quora --- 3hrs
-   2. Fetch multi questions form quora --- 2hnrs
-   3. Convert question to different languages and upload
-   4. Deploy to amazon
+7. Launch
 
-5. Give ONE FULL DAY ---morning to night for this and wrap up.  ---12 hrs straight
-
-6. Important -----share on facebook and whatsapp
-
-0---------------------------
-
-7 Build mobile app-----one day 24 hrs straight
+11. Create separate tables for hindi/telugu
 
 

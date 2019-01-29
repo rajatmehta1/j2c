@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QExtractor {
 
@@ -36,9 +37,9 @@ public class QExtractor {
         Element question = qlist.get(0);
         System.out.println("Title of the page is :-" + question.childNode(0).toString());
         Question q = getQuestion(question.childNode(0).toString());
-        Elements allAnswersList = doc.select("div.answer_text_small");
+        Elements allAnswersList = doc.select("div.layout_2col_main");
         Element allAnswers = allAnswersList.get(0);
-        Elements answers = allAnswers.select("div.u-serid-font-main--large");
+        Elements answers = allAnswers.select("div.u-serif-font-main--large");
         ArrayList<Answer> ansList = new ArrayList<>();
         for (Element answer : answers) {
             ansList.add(getAnswer(answer.html()));
@@ -66,23 +67,31 @@ public class QExtractor {
 
     public static void main(String[] args) throws Exception {
         String webloc = "https://www.quora.com/What-is-diabetic-diet-for-Indian";
-        Document doc = Jsoup.connect(webloc).get();
-        Elements qlist = doc.select("span.ui_qtext_rendered_qtext");
-        Element question = qlist.get(0);
-        System.out.println("Title of the page is ---> " + question.childNode(0).toString());
+        Question q = getQuestionsFromQuora(webloc);
+//        System.out.println("Title of the page is ---> " + q.getQsTxt());
+//
+//        List<Answer> ansList = q.getAnsList();
+//        for(Answer a: ansList) {
+//            System.out.println(" ----------> " + a.getAnsTxt());
+//        }
 
-        Question q = getQuestionsFromQuora(question.childNode(0).toString());
-        Elements allAnswersList = doc.select("div.answer_text_small");
-        Element allAnswers = allAnswersList.get(0);
-        Elements answers = allAnswers.select("div.u-serid-font-main--large");
-        ArrayList<Answer> ansList = new ArrayList<>();
-        for (Element answer : answers) {
-            ansList.add(getAnswer(answer.html()));
-            System.out.println("\n\n-------------------------\n\n");
-            System.out.println(answer.html());
-            System.out.println("\n\n------------------------------------\n\n");
-        }
-        q.setAnsList(ansList);
-        System.out.println(allAnswers.html());
+//        Document doc = Jsoup.connect(webloc).get();
+//        Elements qlist = doc.select("span.ui_qtext_rendered_qtext");
+//        Element question = qlist.get(0);
+//        System.out.println("Title of the page is ---> " + question.childNode(0).toString());
+//
+//        Question q = getQuestionsFromQuora(question.childNode(0).toString());
+//        Elements allAnswersList = doc.select("div.answer_text_small");
+//        Element allAnswers = allAnswersList.get(0);
+//        Elements answers = allAnswers.select("div.u-serid-font-main--large");
+//        ArrayList<Answer> ansList = new ArrayList<>();
+//        for (Element answer : answers) {
+//            ansList.add(getAnswer(answer.html()));
+//            System.out.println("\n\n-------------------------\n\n");
+//            System.out.println(answer.html());
+//            System.out.println("\n\n------------------------------------\n\n");
+//        }
+//        q.setAnsList(ansList);
+//        System.out.println(allAnswers.html());
     }
 }

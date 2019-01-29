@@ -149,7 +149,7 @@
                         </div>
                         <small class="d-block text-right mt-3">
                             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                                <strong class="d-block text-gray-dark">January 1, 2014 by @tendulkar</strong>
+                                <strong class="d-block text-gray-dark">${qs.createDate} by ${qs.displayName}</strong>
                             </p>
                         </small>
                         <small class="d-block text-right mt-3">

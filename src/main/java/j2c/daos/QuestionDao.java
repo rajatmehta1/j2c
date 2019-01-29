@@ -2,6 +2,7 @@ package j2c.daos;
 
 import j2c.pojos.Answer;
 import j2c.pojos.Question;
+import j2c.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,9 @@ import java.util.List;
 public class QuestionDao {
 
     private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     public QuestionDao(JdbcTemplate jdbcTemplate) {
@@ -69,6 +73,9 @@ public class QuestionDao {
                         rs.getInt("topic_id"),
                         rs.getInt("created_by")
                 );
+
+                q.setCreateDate(Util.getFormattedDate(rs.getString("update_time")));
+                q.setDisplayName(userDao.getUser(rs.getInt("created_by")).getDisplayName());
 
             }
             if(pullAnswers) q.setAnsList(this.findAnswers(qid));

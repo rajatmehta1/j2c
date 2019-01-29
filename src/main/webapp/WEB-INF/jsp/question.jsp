@@ -120,7 +120,7 @@
 
                 <c:forEach items="${question.ansList}" var="qAns">
                     <div>
-                        <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+                        <p class="blog-post-meta">${qs.createDate} by ${qs.displayName}</p>
                             <c:out value="${qAns.ansTxt}" escapeXml="false"/>
                         <hr>
                     </div>

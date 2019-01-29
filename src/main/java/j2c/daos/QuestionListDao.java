@@ -3,6 +3,7 @@ package j2c.daos;
 import j2c.pojos.Answer;
 import j2c.pojos.Question;
 import j2c.pojos.Topic;
+import j2c.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,6 +21,9 @@ public class QuestionListDao {
 
     public static int PAGE_SIZE = 10;
     private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private UserDao userDao;
 
 
     @Autowired
@@ -46,6 +50,9 @@ public class QuestionListDao {
                         rs.getInt("topic_id"),
                         rs.getInt("created_by")
                 );
+
+                q.setCreateDate(Util.getFormattedDate(rs.getString("update_time")));
+                q.setDisplayName(userDao.getUser(rs.getInt("created_by")).getDisplayName());
                 if(pullAnswers)
                     q.setFirstAnswer(
                             (this.findAnswers(q.getId()) != null && this.findAnswers(q.getId()).size() > 0)
@@ -86,6 +93,9 @@ public class QuestionListDao {
                         rs.getInt("topic_id"),
                         rs.getInt("created_by")
                 );
+                q.setCreateDate(Util.getFormattedDate(rs.getString("update_time")));
+                q.setDisplayName(userDao.getUser(rs.getInt("created_by")).getDisplayName());
+
                 if(pullAnswers)
                     q.setFirstAnswer(
                             (this.findAnswers(q.getId()) != null && this.findAnswers(q.getId()).size() > 0)
@@ -197,6 +207,9 @@ public class QuestionListDao {
                         rs.getInt("topic_id"),
                         rs.getInt("created_by")
                 );
+                q.setCreateDate(Util.getFormattedDate(rs.getString("update_time")));
+                q.setDisplayName(userDao.getUser(rs.getInt("created_by")).getDisplayName());
+
                 if(pullAnswers)
                     q.setFirstAnswer(
                             (this.findAnswers(q.getId()) != null && this.findAnswers(q.getId()).size() > 0)
@@ -239,6 +252,9 @@ public class QuestionListDao {
                         rs.getInt("topic_id"),
                         rs.getInt("created_by")
                 );
+                q.setCreateDate(Util.getFormattedDate(rs.getString("update_time")));
+                q.setDisplayName(userDao.getUser(rs.getInt("created_by")).getDisplayName());
+
                 if(pullAnswers)
                     q.setFirstAnswer(
                             (this.findAnswers(q.getId()) != null && this.findAnswers(q.getId()).size() > 0)

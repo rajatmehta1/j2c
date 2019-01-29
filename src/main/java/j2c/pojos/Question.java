@@ -14,6 +14,8 @@ public class Question {
     private Answer firstAnswer;
     private String qlink;
     private String questionUrl;
+    private String displayName;
+    private String createDate;
 
     public Question() {
 
@@ -104,5 +106,21 @@ public class Question {
 
     public void setQuestionUrl(String questionUrl) {
         this.questionUrl = questionUrl;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 }
