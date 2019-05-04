@@ -16,6 +16,7 @@ public class Question {
     private String questionUrl;
     private String displayName;
     private String createDate;
+    private String lang;
 
     public Question() {
 
@@ -122,5 +123,13 @@ public class Question {
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
     }
 }

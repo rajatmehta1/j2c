@@ -1,11 +1,8 @@
-package j2c.utils;
+package j2c.utils.translate;
 
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import j2c.pojos.Answer;
+import j2c.pojos.Question;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,72 +12,49 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class TranslateEngToHindiSel {
+public class TranslateHelper {
 
     private static HashMap<String, String> urlMap = new HashMap<>();
     private static ArrayList<String> urlList = new ArrayList<>();
     private String lang = "en";
 
-    static {
-        urlMap.put("en","https://translate.google.com/#auto/en");
-        urlMap.put("hi","https://translate.google.com/#auto/hi");
-        urlMap.put("bn","https://translate.google.com/#auto/bn"); //bengali
-        urlMap.put("gu","https://translate.google.com/#auto/gu"); //gujarati
-        urlMap.put("ml","https://translate.google.com/#auto/ml"); //malayam
-        urlMap.put("mr","https://translate.google.com/#auto/mr"); //marathi
-        urlMap.put("pa","https://translate.google.com/#auto/pa"); //punjabi
-        urlMap.put("ta","https://translate.google.com/#auto/ta"); //tamil
-        urlMap.put("te","https://translate.google.com/#auto/te"); //tamil
+    public static Question translate(String sourceLang, String destLang, Question q) throws Exception {
 
-        urlList.add("en");urlList.add("hi"); urlList.add("bn"); urlList.add("gu"); urlList.add("ml");
-        urlList.add("mr"); urlList.add("pa"); urlList.add("ta"); urlList.add("te");
-    }
-
-
-    public static void main(String[] args) throws Exception {
-        //generate in all languages
-      //  toHindi("i love to read");
-
-        translate(urlList);
-    }
-
-    public static void translate(ArrayList<String> urlList) throws Exception {
-
+        Question newQuestion = new Question();
         System.setProperty("webdriver.chrome.driver","C:\\mystuff\\j2c_infra\\chrome\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-
-
 
         for (String surl: urlList) {
             String baseUrl = urlMap.get(surl);
             String actualTitle = "";
 
-            // launch Fire fox and direct it to the Base URL
             driver.get(baseUrl);
+            WebElement src = driver.findElement(By.id("source"));
 
-
-                WebElement src = driver.findElement(By.id("source"));
-
-                    src.sendKeys("life is beautiful");
+                    src.sendKeys(q.getQsTxt());
                     Thread.sleep(2000);
-//            WebElement aOn = driver.findElement(By.id("sugg-item-hi"));
-//          //  aOn.findElement(By.)
-//            aOn.click();
-//            aOn.click();
 
                 WebElement tgt = driver.findElement(By.className("result-shield-container"));
             Thread.sleep(2000);
 
-                // get the actual value of the title
-                // actualTitle = tgt.getTagName() + " , " + tgt.getText() + "," + tgt.toString();
             System.out.println("----------> " +  tgt.getText() + " \n");
-    }
 
+            newQuestion.setQsTxt(tgt.getText());
 
+            //Answers
+            for (Answer a: q.getAnsList()) {
+                src.sendKeys(a.getAnsTxt());Thread.sleep(2000);
+                System.out.println("Answer ==> " + tgt.getText());
+                Answer newAns = new Answer();
+                    newAns.setAnsTxt(tgt.getText());
+                    newQuestion.getAnsList().add(newAns);
+            }
+
+        }
 
         //close Fire fox
         driver.close();
-
+        return newQuestion;
     }
 
 //    public static void toHindi(String s) throws Exception{

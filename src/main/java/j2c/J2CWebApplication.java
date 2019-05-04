@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableCaching
-@ComponentScan(basePackages = {"j2c.controllers","j2c.daos","j2c.test"})
+@ComponentScan(basePackages = {"j2c.controllers","j2c.daos","j2c.test", "j2c.algo"})
 public class J2CWebApplication  extends SpringBootServletInitializer {
 
     @Override

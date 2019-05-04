@@ -20,6 +20,7 @@ import java.util.List;
 public class QuestionListDao {
 
     public static int PAGE_SIZE = 10;
+    public static int SEARCH_SIZE = 20;
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -344,6 +345,50 @@ public class QuestionListDao {
 
     public String getName() {
         return "qlist dao";
+    }
+
+
+    public List<Question> searchQuestions(String srchTxt, boolean pullAnswers){
+        String sql = "SELECT * FROM q_all WHERE q_text like '%" + srchTxt + "%' and is_active='Y' order by update_time limit " + SEARCH_SIZE;
+        Connection conn = null;
+        List<Question> questions = new ArrayList<>();
+        try {
+            conn = this.jdbcTemplate.getDataSource().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+//                ps.setString(1,srchTxt);
+            Question q = null;
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                q = new Question(
+                        rs.getInt("qid"),
+                        rs.getString("q_text"),
+                        rs.getInt("topic_id"),
+                        rs.getInt("created_by")
+                );
+
+                q.setCreateDate(Util.getFormattedDate(rs.getString("update_time")));
+                q.setDisplayName(userDao.getUser(rs.getInt("created_by")).getDisplayName());
+                if(pullAnswers)
+                    q.setFirstAnswer(
+                            (this.findAnswers(q.getId()) != null && this.findAnswers(q.getId()).size() > 0)
+                                    ? this.findAnswers(q.getId()).get(0): null );
+                questions.add(q);
+
+            }
+
+            rs.close();
+            ps.close();
+            return questions;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+            }
+        }
     }
 
 

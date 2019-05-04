@@ -26,9 +26,11 @@ public class QuestionDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void insert(Question q){
+    public void insert(Question q, String lang){
 
-        String sql = "INSERT INTO q_all " +
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "q_all" : "q_all_" + lang;
+
+        String sql = "INSERT INTO " + tblName + " " +
                 "(q_text, topic_id, created_by, is_active,q_link ) VALUES (?, ?, ?, ?, ?)";
         Connection conn = null;
 
@@ -56,8 +58,11 @@ public class QuestionDao {
     }
 
 
-    public Question findQuestion(int qid,boolean pullAnswers){
-        String sql = "SELECT * FROM q_all WHERE qid = ? and is_active='Y'";
+    public Question findQuestion(int qid,boolean pullAnswers, String lang){
+
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "q_all" : "q_all_" + lang;
+
+        String sql = "SELECT * FROM " + tblName + " WHERE qid = ? and is_active='Y'";
         Connection conn = null;
         try {
             conn = this.jdbcTemplate.getDataSource().getConnection();
@@ -78,7 +83,7 @@ public class QuestionDao {
                 q.setDisplayName(userDao.getUser(rs.getInt("created_by")).getDisplayName());
 
             }
-            if(pullAnswers) q.setAnsList(this.findAnswers(qid));
+            if(pullAnswers) q.setAnsList(this.findAnswers(qid, lang));
             rs.close();
             ps.close();
             return q;
@@ -94,8 +99,11 @@ public class QuestionDao {
     }
 
 
-    public List<Answer> findAnswers(int qid){
-        String sql = "SELECT * FROM a_all WHERE qid = ? and is_active='Y'";
+    public List<Answer> findAnswers(int qid, String lang){
+
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "a_all" : "a_all_" + lang;
+
+        String sql = "SELECT * FROM " + tblName + " WHERE qid = ? and is_active='Y'";
         Connection conn = null;
         try {
             conn = this.jdbcTemplate.getDataSource().getConnection();
@@ -129,9 +137,11 @@ public class QuestionDao {
 
 
 
-    public void insertAnswer(Answer a){
+    public void insertAnswer(Answer a, String lang){
 
-        String sql = "INSERT INTO a_all " +
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "a_all" : "a_all_" + lang;
+
+        String sql = "INSERT INTO " + tblName + " " +
                 "(a_text, qid, created_by, is_active ) VALUES (?, ?, ?, ?)";
         Connection conn = null;
 
@@ -157,8 +167,10 @@ public class QuestionDao {
         }
     }
 
-    public int insertWithKey(Question q) {
-        String sql = "INSERT INTO q_all " +
+    public int insertWithKey(Question q, String lang) {
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "q_all" : "q_all_" + lang;
+
+        String sql = "INSERT INTO " + tblName + " " +
                 "(q_text, topic_id, created_by, is_active ) VALUES (?, ?, ?, ?)";
         Connection conn = null;
         int key = -1;

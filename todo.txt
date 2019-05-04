@@ -1,6 +1,7 @@
 1. Hosting - AWS or A2Hosting
 
 2. Elastic search svr deployment on AWS (index name -> J2C
+   index with mysql contains....
 
 3. Build a table for related questions page populated by a batch job
 

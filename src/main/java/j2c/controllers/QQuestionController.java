@@ -1,5 +1,6 @@
 package j2c.controllers;
 
+import com.google.j2objc.annotations.AutoreleasePool;
 import j2c.daos.QuestionDao;
 import j2c.daos.QuestionListDao;
 import j2c.pojos.Answer;
@@ -27,6 +28,9 @@ public class QQuestionController {
 
     @Autowired
     public QuestionListDao qlistDao;
+
+    @Autowired
+    Preferences pref;
 
 
     @RequestMapping("")
@@ -58,12 +62,12 @@ public class QQuestionController {
         Question q = QExtractor.getQuestionsFromQuora(qst.getQuestionUrl());
             q.setTopicId(1); //TODO
             q.setCreatedBy(2); //TODO
-        int qid = qdao.insertWithKey(q);
+        int qid = qdao.insertWithKey(q, pref.getLang());
 
         for(Answer ans: q.getAnsList()) {
             ans.setQuestionId(qid);
             ans.setCreatedBy(1);//TODO
-            qdao.insertAnswer(ans);
+            qdao.insertAnswer(ans, pref.getLang());
         }
 
         return showExtractLink(model);
@@ -78,12 +82,12 @@ public class QQuestionController {
             Question q = QExtractor.getQuestionsFromQuora(qkey);
             q.setTopicId(1); //TODO
             q.setCreatedBy(2); //TODO
-            int qid = qdao.insertWithKey(q);
+            int qid = qdao.insertWithKey(q, pref.getLang());
 
             for(Answer ans: q.getAnsList()) {
                 ans.setQuestionId(qid);
                 ans.setCreatedBy(2);//TODO
-                qdao.insertAnswer(ans);
+                qdao.insertAnswer(ans, pref.getLang());
             }
 
 
@@ -129,12 +133,12 @@ public class QQuestionController {
                 q.setTopicId(1);
                 q.setCreatedBy(2);
                 q.setQlink(urlList.get(i));
-                int qid = qdao.insertWithKey(q);
+                int qid = qdao.insertWithKey(q, pref.getLang());
 
                 for(Answer ans: q.getAnsList() ) {
                     ans.setQuestionId(qid);
                     ans.setCreatedBy(2);
-                    qdao.insertAnswer(ans);
+                    qdao.insertAnswer(ans, pref.getLang());
                 }
         }
         return "Created "+ sz +" questions";

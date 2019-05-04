@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+//main class
 public class QExtractor {
 
     private static final String URL_START =
@@ -18,13 +19,14 @@ public class QExtractor {
 
     public static ArrayList<String> getBulkUrlsFromQuora(String qurl) throws Exception {
         ArrayList<String> urlList = new ArrayList<>();
-        String webloc = "https://www.quora.com/search?q=cancer+india";
+       // String webloc = "https://www.quora.com/search?q=cancer+india"; //replace the below custom url for local testing
+        String webloc = qurl;
         Document doc = Jsoup.connect(webloc).get();
         Elements qlist = doc.select("a.question_link");
         for (Element questionElem : qlist) {
-            System.out.println("\n ---------------------------------------- \n");
-            System.out.println(questionElem.attr("href"));
-            System.out.println("\n ---------------------------------------- \n");
+//            System.out.println("\n ---------------------------------------- \n");
+//            System.out.println(questionElem.attr("href"));
+//            System.out.println("\n ---------------------------------------- \n");
             urlList.add(URL_START + questionElem.attr("href"));
         }
         return urlList;
@@ -35,7 +37,7 @@ public class QExtractor {
         Elements qlist =
                 doc.select("span.ui_qtext_rendered_qtext");
         Element question = qlist.get(0);
-        System.out.println("Title of the page is :-" + question.childNode(0).toString());
+//        System.out.println("Title of the page is :-" + question.childNode(0).toString());
         Question q = getQuestion(question.childNode(0).toString());
         Elements allAnswersList = doc.select("div.layout_2col_main");
         Element allAnswers = allAnswersList.get(0);
@@ -43,12 +45,12 @@ public class QExtractor {
         ArrayList<Answer> ansList = new ArrayList<>();
         for (Element answer : answers) {
             ansList.add(getAnswer(answer.html()));
-            System.out.println("\n\n-------------------------\n\n");
-            System.out.println(answer.html());
-            System.out.println("\n\n------------------------------------\n\n");
+//            System.out.println("\n\n-------------------------\n\n");
+//            System.out.println(answer.html());
+//            System.out.println("\n\n------------------------------------\n\n");
         }
         q.setAnsList(ansList);
-        System.out.println(allAnswers.html());
+//        System.out.println(allAnswers.html());
         return q;
     }
 

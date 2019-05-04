@@ -17,10 +17,17 @@ public class DiseaseExtractor {
 
             Document doc = Jsoup.connect(BASE_URL + path.toUpperCase() + ".html" ).get();
             Elements qlist = doc.select("ul.listAlphatext li");
+            int i = 0;
             for(Element questionElem: qlist) {
                 System.out.println(questionElem.text());
             }
 
         }
     }
+
+//
+//    public String generateTopicInsert(int i , String diseaseName) {
+//        String insrt =
+//                "insert into topics(topic_id,topic_name,topic_lang) value(" + i + ",\'" + diseaseName + "\',\'\');");
+//    }
 }

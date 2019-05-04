@@ -19,12 +19,15 @@ public class QuestionController {
     @Autowired
     QuestionDao qdao;
 
+    @Autowired
+    Preferences pref;
+
 
     @RequestMapping(value="/j2c/question/{id}",method= RequestMethod.GET)
     public String getQuestion(@PathVariable String id, Model model) {
 
         int qid = Integer.parseInt(id);
-        Question q = qdao.findQuestion(qid,true);
+        Question q = qdao.findQuestion(qid,true, pref.getLang());
         model.addAttribute("question",q);
         model.addAttribute("qst",new Question());
         model.addAttribute("ans",new Answer());
@@ -38,7 +41,7 @@ public class QuestionController {
     public String addQuestion(@ModelAttribute("qst") Question qst, Model model) {
         //qst.setTopicId(2);
         qst.setCreatedBy(2);
-        qdao.insert(qst);
+        qdao.insert(qst, pref.getLang());
         return getQuestion("3", model);
 
     }
@@ -48,7 +51,7 @@ public class QuestionController {
     public String addAnswer(@ModelAttribute("ans") Answer ans) {
         //qst.setTopicId(2);
         ans.setCreatedBy(2);
-        qdao.insertAnswer(ans);
+        qdao.insertAnswer(ans, pref.getLang());
         return "result";
     }
 

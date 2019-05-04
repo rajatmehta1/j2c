@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Elastic search (index = j2c)
+ */
 @Controller
 public class SearchController {
 
@@ -23,6 +26,9 @@ public class SearchController {
 
     @Autowired
     QuestionDao questionDao;
+
+    @Autowired
+    Preferences pref;
 
     @RequestMapping("/j2c/qjson")
     public @ResponseBody String getQuestions() {
@@ -33,7 +39,7 @@ public class SearchController {
 
     @RequestMapping("/j2c/startIndexing")
     public @ResponseBody String startIndexing() throws Exception {
-        Question q = questionDao.findQuestion(9, true);
+        Question q = questionDao.findQuestion(9, true, pref.getLang());
         Gson gson = new Gson();
         String jsonObj = gson.toJson(q);
         IndexDocuments id = new IndexDocuments();

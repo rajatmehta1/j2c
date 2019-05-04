@@ -6,6 +6,7 @@ public class Answer {
     private int order;
     private Integer questionId;
     private Integer createdBy;
+    private String shortAnsText;
 
     public Answer() {
 
@@ -55,5 +56,15 @@ public class Answer {
 
     public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
+    }
+
+    //truncate to fit on main screen to 400 characters
+    public String getShortAnsText() {
+        if(ansTxt.length() > 400) return ansTxt.substring(0,400);
+        else return ansTxt;
+    }
+
+    public void setShortAnsText(String st) {
+        shortAnsText = st;
     }
 }
