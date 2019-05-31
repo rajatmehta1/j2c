@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class LangConverter {
     private String sourceLang;
     private ArrayList<String> destLangs;
-    private static final String CHROME_WEB_DRIVER = "C:\\mystuff\\j2c_infra\\chrome\\chromedriver.exe";
+    private static final String CHROME_WEB_DRIVER = "C:\\mystuff\\j2c_infra\\chrome\\72\\chromedriver.exe";
     private static HashMap<String, String> urlMap = new HashMap<>();
     private static ArrayList<String> defaultConvLangList = new ArrayList<>();
 

@@ -15,4 +15,20 @@
 
 11. Create separate tables for hindi/telugu
 
+--------------------
+1. topic list...full
+
+2. Insert question...get good db and backup
+
+3. create website in aws and launch
+
+4. no login/pwd...
+
+5. track upload of new qustion to new table and check approval
+
+6. Track reading of questions...with google analytics and optimize..
+
+7. Search is mysql contained initially.
+
+11. LAUNCH BY 15th
 

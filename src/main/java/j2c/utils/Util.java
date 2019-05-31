@@ -21,6 +21,10 @@ public class Util {
         return dt;
     }
 
+
+    public static int getCreatedBy() {
+        return 1; //admin
+    }
 }
 
 

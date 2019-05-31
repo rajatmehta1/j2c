@@ -34,8 +34,9 @@ public class QuestionListDao {
 
 
 
-    public List<Question> findQuestions(boolean pullAnswers){
-        String sql = "SELECT * FROM q_all WHERE is_active='Y' order by update_time";
+    public List<Question> findQuestions(boolean pullAnswers,String lang){
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "q_all" : "q_all_" + lang;
+        String sql = "SELECT * FROM " + tblName + " WHERE is_active='Y' order by update_time";
         Connection conn = null;
         List<Question> questions = new ArrayList<>();
         try {
@@ -56,8 +57,8 @@ public class QuestionListDao {
                 q.setDisplayName(userDao.getUser(rs.getInt("created_by")).getDisplayName());
                 if(pullAnswers)
                     q.setFirstAnswer(
-                            (this.findAnswers(q.getId()) != null && this.findAnswers(q.getId()).size() > 0)
-                                    ? this.findAnswers(q.getId()).get(0): null );
+                            (this.findAnswers(q.getId(),lang) != null && this.findAnswers(q.getId(),lang).size() > 0)
+                                    ? this.findAnswers(q.getId(),lang).get(0): null );
                 questions.add(q);
 
             }
@@ -76,8 +77,9 @@ public class QuestionListDao {
         }
     }
 
-    public List<Question> findQuestions(int topicId, boolean pullAnswers){
-        String sql = "SELECT * FROM q_all WHERE topic_id = ? and is_active='Y' order by update_time";
+    public List<Question> findQuestions(int topicId, boolean pullAnswers,String lang){
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "q_all" : "q_all_" + lang;
+        String sql = "SELECT * FROM " + tblName + " WHERE topic_id = ? and is_active='Y' order by update_time";
         Connection conn = null;
         List<Question> questions = new ArrayList<>();
         try {
@@ -99,8 +101,8 @@ public class QuestionListDao {
 
                 if(pullAnswers)
                     q.setFirstAnswer(
-                            (this.findAnswers(q.getId()) != null && this.findAnswers(q.getId()).size() > 0)
-                                    ? this.findAnswers(q.getId()).get(0): null );
+                            (this.findAnswers(q.getId(),lang) != null && this.findAnswers(q.getId(),lang).size() > 0)
+                                    ? this.findAnswers(q.getId(),lang).get(0): null );
                 questions.add(q);
 
             }
@@ -120,8 +122,9 @@ public class QuestionListDao {
     }
 
 
-    public List<Answer> findAnswers(int qid){
-        String sql = "SELECT * FROM a_all WHERE qid = ? and is_active='Y'";
+    public List<Answer> findAnswers(int qid,String lang){
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "a_all" : "a_all_" + lang;
+        String sql = "SELECT * FROM " + tblName+ " WHERE qid = ? and is_active='Y'";
         Connection conn = null;
         try {
             conn = this.jdbcTemplate.getDataSource().getConnection();
@@ -189,9 +192,10 @@ public class QuestionListDao {
     }
 
 
-
-    public List<Question> findQuestionsByUser(int userId, boolean pullAnswers){
-        String sql = "SELECT * FROM q_all WHERE created_by = ? and is_active='Y' order by update_time";
+    //fix the bug for answer in a particular language
+    public List<Question> findQuestionsByUser(int userId, boolean pullAnswers,String lang){
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "a_all" : "a_all_" + lang;
+        String sql = "SELECT * FROM " +  tblName + " WHERE created_by = ? and is_active='Y' order by update_time";
         Connection conn = null;
         List<Question> questions = new ArrayList<>();
         try {
@@ -213,8 +217,8 @@ public class QuestionListDao {
 
                 if(pullAnswers)
                     q.setFirstAnswer(
-                            (this.findAnswers(q.getId()) != null && this.findAnswers(q.getId()).size() > 0)
-                                    ? this.findAnswers(q.getId()).get(0): null );
+                            (this.findAnswers(q.getId(),lang) != null && this.findAnswers(q.getId(),lang).size() > 0)
+                                    ? this.findAnswers(q.getId(),lang).get(0): null );
                 questions.add(q);
 
             }
@@ -235,8 +239,9 @@ public class QuestionListDao {
 
 
 
-    public List<Question> findQuestionsByRange(int qidStart, boolean pullAnswers){
-        String sql = "SELECT * FROM q_all WHERE qid > ? and is_active = 'Y'";
+    public List<Question> findQuestionsByRange(int qidStart, boolean pullAnswers, String lang){
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "q_all" : "q_all_" + lang;
+        String sql = "SELECT * FROM " +  tblName + " WHERE qid > ? and is_active = 'Y'";
         Connection conn = null;
         List<Question> questions = new ArrayList<>();
         try {
@@ -258,8 +263,8 @@ public class QuestionListDao {
 
                 if(pullAnswers)
                     q.setFirstAnswer(
-                            (this.findAnswers(q.getId()) != null && this.findAnswers(q.getId()).size() > 0)
-                                    ? this.findAnswers(q.getId()).get(0): null );
+                            (this.findAnswers(q.getId(),lang) != null && this.findAnswers(q.getId(),lang).size() > 0)
+                                    ? this.findAnswers(q.getId(),lang).get(0): null );
                 questions.add(q);
 
             }
@@ -282,7 +287,8 @@ public class QuestionListDao {
 
     @Cacheable("questions")
     public HashMap<String, String> getAllQuestions() {
-        String sql = "SELECT * FROM q_all WHERE is_active='Y' order by update_time";
+
+        String sql = "SELECT * FROM " + "q_all" + " WHERE is_active='Y' order by update_time";
         Connection conn = null;
         HashMap<String, String> hmap = new HashMap<>();
         try {
@@ -348,8 +354,9 @@ public class QuestionListDao {
     }
 
 
-    public List<Question> searchQuestions(String srchTxt, boolean pullAnswers){
-        String sql = "SELECT * FROM q_all WHERE q_text like '%" + srchTxt + "%' and is_active='Y' order by update_time limit " + SEARCH_SIZE;
+    public List<Question> searchQuestions(String srchTxt, boolean pullAnswers,String lang){
+        String tblName = (null == lang || "en".equalsIgnoreCase(lang)) ? "q_all" : "q_all_" + lang;
+        String sql = "SELECT * FROM " + tblName + " WHERE q_text like '%" + srchTxt + "%' and is_active='Y' order by update_time limit " + SEARCH_SIZE;
         Connection conn = null;
         List<Question> questions = new ArrayList<>();
         try {
@@ -371,8 +378,8 @@ public class QuestionListDao {
                 q.setDisplayName(userDao.getUser(rs.getInt("created_by")).getDisplayName());
                 if(pullAnswers)
                     q.setFirstAnswer(
-                            (this.findAnswers(q.getId()) != null && this.findAnswers(q.getId()).size() > 0)
-                                    ? this.findAnswers(q.getId()).get(0): null );
+                            (this.findAnswers(q.getId(), lang) != null && this.findAnswers(q.getId(), lang).size() > 0)
+                                    ? this.findAnswers(q.getId(), lang).get(0): null );
                 questions.add(q);
 
             }
@@ -392,4 +399,30 @@ public class QuestionListDao {
     }
 
 
+    public void populateQuestionsMap(HashMap<String, String> eqMap) {
+        String sql = "SELECT qid, q_text FROM q_all";
+        Connection conn = null;
+        try {
+            conn = this.jdbcTemplate.getDataSource().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+//                ps.setString(1,srchTxt);
+            Question q = null;
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                eqMap.put(rs.getString("q_text").toLowerCase().trim(),"PRESENT");
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+            }
+        }
+
+    }
 }

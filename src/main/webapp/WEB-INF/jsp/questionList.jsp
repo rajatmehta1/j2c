@@ -132,12 +132,19 @@
                 <div class="p-3 bg-white">
 
                     <h6 class="border-bottom">Topics</h6>
-                    <ol class="list-unstyled mb-0">
+                    <ol id="topicsListID" class="list-unstyled mb-0 scroll-bar">
                         <c:forEach items="${topics}" var="topic">
+                         <c:if test = "${topic.topicId < 15}">
                             <li><a href="/j2c/topic/${topic.topicId}/questionsList" class="text-dark">${topic.topicName}</a></li>
                             <li>&nbsp;</li>
+                        </c:if>
+                            <c:if test = "${topic.topicId >= 15}">
+                                <li class="d-none"><a href="/j2c/topic/${topic.topicId}/questionsList" class="text-dark">${topic.topicName}</a></li>
+                                <li class="d-none">&nbsp;</li>
+                            </c:if>
                         </c:forEach>
                     </ol>
+                    <button id="moreTopics" onclick="showMoreTopics()">more...</button>
 
                 </div>
 
@@ -292,6 +299,17 @@
     </div>
 
     <%@ include file = "inc_tail.jsp" %>
+    <script>
+        function showMoreTopics() {
+            alert('came here')
+
+            $("ol li").removeClass("d-none").addClass("d-block");
+            $('#moreTopics').hide();
+            alert('done')
+
+        }
+
+    </script>
 
 </body>
 </html>

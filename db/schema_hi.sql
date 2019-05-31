@@ -9,8 +9,9 @@ use j2c;
      updated_by VARCHAR(25),
      update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
      is_active CHAR(1) NOT NULL,
+     q_link TEXT NULL,
      PRIMARY KEY  (qid)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- hindi answers
     CREATE TABLE a_all_hi (

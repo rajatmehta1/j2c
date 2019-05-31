@@ -11,6 +11,7 @@ use j2c;
      updated_by VARCHAR(25),
      update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
      is_active CHAR(1) NOT NULL,
+     q_link TEXT NULL,
      PRIMARY KEY  (qid)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -59,6 +60,7 @@ insert into topics(topic_id,topic_name,topic_lang) value(4,'Mental Health','en')
 insert into topics(topic_id,topic_name,topic_lang) value(5,'Heart Disease','en');
 insert into topics(topic_id,topic_name,topic_lang) value(6,'Lungs Disease','en');
 
+insert into topics(topic_id,topic_name,topic_lang) value(8,'cancer','en');
 
   -- Category
   CREATE TABLE sub_topics (
@@ -75,11 +77,11 @@ insert into sub_topics(stopic_id,stopic_name,topic_id,topic_lang) value(1,'Diabe
 insert into sub_topics(stopic_id,stopic_name,topic_id,topic_lang) value(2,'Diabetes_Type1',1,'en');
 insert into sub_topics(stopic_id,stopic_name,topic_id,topic_lang) value(3,'Diabetes_Type2',1,'en');
 
-
+--
 -- Last know batch value
     CREATE TABLE LAST_KNOWN (
      lk_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-     qid INT,
+     qcount INT,
      aid INT,
      created_by INT,
      updated_by VARCHAR(25),

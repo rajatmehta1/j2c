@@ -27,11 +27,12 @@ public class QuestionListController {
 
     @RequestMapping("/j2c")
     public String getQuestionList(HttpServletRequest request, HttpServletResponse response, @RequestParam(name="lang") String lang, Model model) {
-
-        String localLang = LangHelper.langFromCookie(request, response, lang);
-            pref.setLang(localLang);
+        if(null == lang)
+            lang = "en";
+      //  String localLang = LangHelper.langFromCookie(request, response, lang);
+            pref.setLang(lang);
         List<Question> ql =
-                qlDao.findQuestions( true);
+                qlDao.findQuestions( true, lang);
 //        for (Question q:ql
 //             ) {
 //            System.out.println(" ------> " + q.getQsTxt());
@@ -69,7 +70,7 @@ public class QuestionListController {
     @RequestMapping("/j2c/topic/{topicId}/questionsList")
     public String getQuestionList(@PathVariable int topicId, Model model) {
         List<Question> ql =
-                qlDao.findQuestions( topicId,true);
+                qlDao.findQuestions( topicId,true, pref.getLang());
 //        for (Question q:ql
 //             ) {
 //            System.out.println(" ------> " + q.getQsTxt());
@@ -81,6 +82,7 @@ public class QuestionListController {
         model.addAttribute("ans",new Answer());
         model.addAttribute("usr",new User());
         model.addAttribute("topics",topics);
+        model.addAttribute("srch",new Search());
         return "questionList";
     }
 

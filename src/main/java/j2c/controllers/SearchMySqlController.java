@@ -22,16 +22,19 @@ public class SearchMySqlController {
     @Autowired
     QuestionListDao qlDao;
 
+    @Autowired
+    Preferences pref;
+
     @RequestMapping("/j2c/m/search")
     public @ResponseBody List<Question> search(@RequestParam(name = "srch") String srchTxt) throws Exception {
-        List<Question> rst = qlDao.searchQuestions(srchTxt,true);
+        List<Question> rst = qlDao.searchQuestions(srchTxt,true, pref.getLang());
         return rst;
     }
 
 
     @RequestMapping(value="/j2c/m/srch",method= RequestMethod.POST)
     public String search(@ModelAttribute("srch") Search srchAttr, Model model) {
-        List<Question> rst = qlDao.searchQuestions(srchAttr.getSrchTxt(),true);
+        List<Question> rst = qlDao.searchQuestions(srchAttr.getSrchTxt(),true,pref.getLang());
             model.addAttribute("srch_results",rst);
 
         List<Topic> topics = qlDao.findTopics();

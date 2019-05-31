@@ -41,8 +41,8 @@ public class QuestionController {
     public String addQuestion(@ModelAttribute("qst") Question qst, Model model) {
         //qst.setTopicId(2);
         qst.setCreatedBy(2);
-        qdao.insert(qst, pref.getLang());
-        return getQuestion("3", model);
+        int k = qdao.insertWithKey(qst, pref.getLang());
+        return getQuestion("" + k, model);
 
     }
 

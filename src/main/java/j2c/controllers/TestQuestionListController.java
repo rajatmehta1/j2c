@@ -16,7 +16,7 @@ public class TestQuestionListController {
 
     @RequestMapping(value="/j2c/testquestions", method = RequestMethod.GET)
     public @ResponseBody List<Question> getQuestions() {
-        return qdao.findQuestionsByRange(0, true);
+        return qdao.findQuestionsByRange(0, true, "en");
     }
 
 

@@ -41,13 +41,16 @@ public class QExtractor {
         Question q = getQuestion(question.childNode(0).toString());
         Elements allAnswersList = doc.select("div.layout_2col_main");
         Element allAnswers = allAnswersList.get(0);
-        Elements answers = allAnswers.select("div.u-serif-font-main--large");
+        Elements answers = allAnswers.select("div.ui_qtext_expanded");
         ArrayList<Answer> ansList = new ArrayList<>();
+
         for (Element answer : answers) {
-            ansList.add(getAnswer(answer.html()));
-//            System.out.println("\n\n-------------------------\n\n");
-//            System.out.println(answer.html());
+            if(answer.text().length() < 5000) {
+                ansList.add(getAnswer(answer.text()));
+                System.out.println("\n\n-------------------------\n\n");
+                System.out.println(answer.text());
 //            System.out.println("\n\n------------------------------------\n\n");
+            }
         }
         q.setAnsList(ansList);
 //        System.out.println(allAnswers.html());

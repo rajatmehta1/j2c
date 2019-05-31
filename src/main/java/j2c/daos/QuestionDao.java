@@ -150,7 +150,12 @@ public class QuestionDao {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, a.getAnsTxt());
             ps.setInt(2, a.getQuestionId());
-            ps.setInt(3, a.getCreatedBy());
+
+            if(null == a.getCreatedBy()) {
+                ps.setInt(3, Util.getCreatedBy());
+            } else {
+                ps.setInt(3, a.getCreatedBy());
+            }
             ps.setString(4, "Y");
             ps.executeUpdate();
             ps.close();
@@ -180,7 +185,11 @@ public class QuestionDao {
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, q.getQsTxt());
             ps.setInt(2, q.getTopicId());
-            ps.setInt(3, q.getCreatedBy());
+            if(null == q.getCreatedBy()) {
+                ps.setInt(3, Util.getCreatedBy());
+            } else {
+                ps.setInt(3, q.getCreatedBy());
+            }
             ps.setString(4, "Y");
             ps.executeUpdate();
 

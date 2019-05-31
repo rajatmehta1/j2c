@@ -32,7 +32,7 @@ public class SearchController {
 
     @RequestMapping("/j2c/qjson")
     public @ResponseBody String getQuestions() {
-        List<Question> questions = qdao.findQuestionsByRange(0,false);
+        List<Question> questions = qdao.findQuestionsByRange(0,false, pref.getLang());
         Gson gson = new Gson();
         return gson.toJson(questions);
     }
