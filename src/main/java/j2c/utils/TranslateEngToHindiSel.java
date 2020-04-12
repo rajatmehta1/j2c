@@ -46,7 +46,7 @@ public class TranslateEngToHindiSel {
 
     public static void translate(ArrayList<String> urlList) throws Exception {
 
-        System.setProperty("webdriver.chrome.driver","C:\\mystuff\\j2c_infra\\chrome\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","C:\\mystuff\\j2c_infra\\chrome\\72\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
 

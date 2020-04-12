@@ -176,7 +176,7 @@
             </div><!-- /.blog-main -->
 
 
-        </div><!-- /.row -->o
+        </div><!-- /.row -->
     </main><!-- /.container -->
 
     <footer class="blog-footer">

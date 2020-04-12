@@ -10,7 +10,9 @@
             <div class="modal-body">
                 <div class="bg-light rounded alert alert-dismissible">
                     <p class="mb-0">
-                        Get answers to your health related queries.
+                        Join2Cure is a health related forum for India.
+                        Here you can get answers to your health related queries.
+                        It supports multiple languages like English, Hindi and Telugu.
                     </p>
                     <!-- <a class="btn btn-sm btn-warning" href="#">Login</a>
                     <a class="btn btn-sm btn-primary" href="#">Sign Up</a> -->

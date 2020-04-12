@@ -60,8 +60,9 @@ public class Answer {
 
     //truncate to fit on main screen to 400 characters
     public String getShortAnsText() {
-        if(ansTxt.length() > 400) return ansTxt.substring(0,400);
-        else return ansTxt;
+//        if(ansTxt.length() > 400) return ansTxt.substring(0,400);
+//        else return ansTxt;
+        return ansTxt;
     }
 
     public void setShortAnsText(String st) {

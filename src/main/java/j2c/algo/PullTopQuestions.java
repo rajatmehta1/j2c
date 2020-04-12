@@ -10,6 +10,7 @@ import j2c.utils.extract.QExtractor;
 import j2c.utils.lang.LangConverter;
 import j2c.utils.translate.TranslateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Array;
@@ -58,14 +59,18 @@ public class PullTopQuestions {
      /*
       * Main method handling the core operation
       */
+//     @Async
      public void run() {
        //  this.init();
-//         List<Topic> topicList = fetchTopics();
+//        List<Topic> topicList = fetchTopics();
+
+
          Topic tt = new Topic();
-         tt.setTopicName("cancer");
-         tt.setTopicId(8);
+         tt.setTopicName("Asthma");
+         tt.setTopicId(17);
 
          List<Topic> topicList = Arrays.asList(tt);
+
 
          for (Topic t: topicList) {
              ArrayList<String> trendingQuestionUrlsForTopic = trendingQuestionsForTopic(t);
@@ -74,6 +79,7 @@ public class PullTopQuestions {
                 convertAndInsert(questions,t.getTopicId());//convert to lang list
          }
 
+         System.out.println("##################The load of questions is completed ############################");
      }
 
     public void testRun(boolean insertInDB) {
@@ -115,7 +121,7 @@ public class PullTopQuestions {
 
      // Try pagination in this...store the old paginated number and next pull from next number onwards
      public ArrayList<String> trendingQuestionsForTopic(Topic t) {
-         String bulkQuestionsUrl = "https://www.quora.com/search?q=" + t.getTopicName() + "+india";
+         String bulkQuestionsUrl = "https://www.quora.com/search?q=corona";
          ArrayList<String> bulkQuestionUrls = null;
          try {
              bulkQuestionUrls =
@@ -128,6 +134,7 @@ public class PullTopQuestions {
 
     private ArrayList<Question> fetchQuestionFromQuesUrls(ArrayList<String> trendingQuestionUrlsForTopic) {
          ArrayList<Question> questions = new ArrayList<>();
+         int i = 0;
         for (String qurl: trendingQuestionUrlsForTopic) {
             try {
                 Question q = QExtractor.getQuestionsFromQuora(qurl);
@@ -135,6 +142,7 @@ public class PullTopQuestions {
             } catch(Exception e) {
                 e.printStackTrace();
             }
+            if (i == 0) break;
         }
         return questions;
     }

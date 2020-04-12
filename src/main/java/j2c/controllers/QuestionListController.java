@@ -1,5 +1,6 @@
 package j2c.controllers;
 
+import j2c.daos.ClickStreamDao;
 import j2c.daos.QuestionListDao;
 import j2c.pojos.*;
 import j2c.utils.LangHelper;
@@ -25,8 +26,14 @@ public class QuestionListController {
     @Autowired
     Preferences pref;
 
+    @Autowired
+    ClickStreamDao clickStreamDao;
+
     @RequestMapping("/j2c")
     public String getQuestionList(HttpServletRequest request, HttpServletResponse response, @RequestParam(name="lang") String lang, Model model) {
+        ClickVO cvo = new ClickVO();
+          cvo.setPageType(1);cvo.setUpdatedBy("admin");
+        clickStreamDao.recordClick(cvo);
         if(null == lang)
             lang = "en";
       //  String localLang = LangHelper.langFromCookie(request, response, lang);
@@ -45,6 +52,7 @@ public class QuestionListController {
             model.addAttribute("usr",new User());
             model.addAttribute("topics",topics);
             model.addAttribute("srch",new Search());
+            model.addAttribute("selLang",lang);
         return "questionList";
     }
 

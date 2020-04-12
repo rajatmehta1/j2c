@@ -21,7 +21,7 @@ public class QExtractor {
         ArrayList<String> urlList = new ArrayList<>();
        // String webloc = "https://www.quora.com/search?q=cancer+india"; //replace the below custom url for local testing
         String webloc = qurl;
-        Document doc = Jsoup.connect(webloc).get();
+        Document doc = Jsoup.connect(webloc).userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6").get();
         Elements qlist = doc.select("a.question_link");
         for (Element questionElem : qlist) {
 //            System.out.println("\n ---------------------------------------- \n");
@@ -33,14 +33,19 @@ public class QExtractor {
     }
 
     public static Question getQuestionsFromQuora(String qurl) throws Exception {
-        Document doc = Jsoup.connect(qurl).get();
+        System.out.println("Came here 0");
+        Document doc = Jsoup.connect(qurl).userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6").get();
+        System.out.println("Came here 1");
         Elements qlist =
                 doc.select("span.ui_qtext_rendered_qtext");
+        System.out.println("Came here 2");
         Element question = qlist.get(0);
 //        System.out.println("Title of the page is :-" + question.childNode(0).toString());
         Question q = getQuestion(question.childNode(0).toString());
+        System.out.println("Came here 3");
         Elements allAnswersList = doc.select("div.layout_2col_main");
         Element allAnswers = allAnswersList.get(0);
+        System.out.println("Came here 4");
         Elements answers = allAnswers.select("div.ui_qtext_expanded");
         ArrayList<Answer> ansList = new ArrayList<>();
 
@@ -71,9 +76,9 @@ public class QExtractor {
     }
 
     public static void main(String[] args) throws Exception {
-        String webloc = "https://www.quora.com/What-is-diabetic-diet-for-Indian";
+        String webloc = "http://www.quora.com/What-is-the-best-way-to-manage-type-2-diabetes-by-Indian-Diet";
         Question q = getQuestionsFromQuora(webloc);
-//        System.out.println("Title of the page is ---> " + q.getQsTxt());
+        System.out.println("Title of the page is ---> " + q.getQsTxt());
 //
 //        List<Answer> ansList = q.getAnsList();
 //        for(Answer a: ansList) {

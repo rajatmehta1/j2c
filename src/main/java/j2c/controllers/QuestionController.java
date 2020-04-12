@@ -1,8 +1,10 @@
 package j2c.controllers;
 
 import j2c.daos.QuestionDao;
+import j2c.daos.RelatedQuestionsDao;
 import j2c.pojos.Answer;
 import j2c.pojos.Question;
+import j2c.pojos.Search;
 import j2c.pojos.User;
 import j2c.test.Customer;
 import j2c.test.MyBean;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -18,6 +22,9 @@ public class QuestionController {
 
     @Autowired
     QuestionDao qdao;
+
+    @Autowired
+    RelatedQuestionsDao rqDao;
 
     @Autowired
     Preferences pref;
@@ -28,10 +35,14 @@ public class QuestionController {
 
         int qid = Integer.parseInt(id);
         Question q = qdao.findQuestion(qid,true, pref.getLang());
-        model.addAttribute("question",q);
-        model.addAttribute("qst",new Question());
-        model.addAttribute("ans",new Answer());
-        model.addAttribute("usr",new User());
+
+        List<Question> relQuestions = rqDao.getRelatedQuestions(qid, q.getTopicId(),pref.getLang());
+            model.addAttribute("question",q);
+            model.addAttribute("qst",new Question());
+            model.addAttribute("ans",new Answer());
+            model.addAttribute("usr",new User());
+            model.addAttribute("rel_questions", relQuestions);
+        model.addAttribute("srch",new Search());
             return "question";
 
     }

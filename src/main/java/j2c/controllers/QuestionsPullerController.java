@@ -3,6 +3,7 @@ package j2c.controllers;
 import j2c.algo.PullTopQuestions;
 import j2c.pojos.Question;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +25,10 @@ public class QuestionsPullerController {
         return "Pulled questions check in DB";
     }
 
+
+    @GetMapping("/tqAsync")
+    public void pullTopQuestionsAsync() {
+        topQstHelper.run();
+    }
 
 }

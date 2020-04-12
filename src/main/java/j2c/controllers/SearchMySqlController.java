@@ -17,6 +17,7 @@ import java.util.List;
  * @version 1.0
  */
 @Controller
+@RequestMapping("/j2c")
 public class SearchMySqlController {
 
     @Autowired
@@ -25,14 +26,14 @@ public class SearchMySqlController {
     @Autowired
     Preferences pref;
 
-    @RequestMapping("/j2c/m/search")
+    @RequestMapping("/m/search")
     public @ResponseBody List<Question> search(@RequestParam(name = "srch") String srchTxt) throws Exception {
         List<Question> rst = qlDao.searchQuestions(srchTxt,true, pref.getLang());
         return rst;
     }
 
 
-    @RequestMapping(value="/j2c/m/srch",method= RequestMethod.POST)
+    @RequestMapping(value="/m/srch",method= RequestMethod.POST)
     public String search(@ModelAttribute("srch") Search srchAttr, Model model) {
         List<Question> rst = qlDao.searchQuestions(srchAttr.getSrchTxt(),true,pref.getLang());
             model.addAttribute("srch_results",rst);

@@ -55,15 +55,21 @@
             pointer-events: none;
             color: #aaa;
         }
+
+        .myNewDivHeight{
+             height:250px;
+             overflow: hidden;
+        }
+
     </style>
 
     <script language="JavaScript">
         function redirectLang() {
             var langSelected = document.getElementById("selLangID").selectedIndex
             if(langSelected == 1) {
-                window.location.href = "http://localhost:8080/j2c?lang=hi"
+                window.location.href = "/j2c?lang=hi"
             } else {
-                window.location.href = "http://localhost:8080/j2c?lang=en"
+                window.location.href = "/j2c?lang=en"
             }
         }
 
@@ -295,7 +301,7 @@
                 </div>
 
                 <div class="p-3">
-                    <a class="btn btn-sm btn-success" href="#" data-toggle="modal" data-target="#exampleModal">+ Ask a Question</a>
+                    <%--<a class="btn btn-sm btn-success" href="#" data-toggle="modal" data-target="#exampleModal">+ Ask a Question</a>--%>
                 </div>
             </aside><!-- /.blog-sidebar -->
 
@@ -308,7 +314,7 @@
                             <a href="/j2c/question/${qs.id}" class="text-dark">${qs.qsTxt}</a></font></h6>
                         <div class="media text-muted pt-3">
                                 <%--<textarea class="form-control rounded-0 text-left" contenteditable="false" rows="2">--%>
-                            <c:out value="${qs.firstAnswer.shortAnsText}" escapeXml="false"/>
+                            <c:out value="${qs.firstAnswer.ansTxt}" escapeXml="false"/>
                                 <%--</textarea>--%>
                         </div>
                         <small class="d-block text-right mt-3">

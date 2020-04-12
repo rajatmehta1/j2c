@@ -15,7 +15,7 @@
 
                     <div class="form-group">
                         <label for="qsTxt">Your Answer</label>
-                        <form:textarea path="ansTxt" rows="7" id="summernote"></form:textarea>
+                        <form:textarea path="ansTxt" rows="7" id="summernote" placeholder="Enter you answer here..."></form:textarea>
 
                     </div>
                 </div>
