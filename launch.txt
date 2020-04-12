@@ -1,0 +1,7 @@
+Contains the code needed to launch this projecjt
+
+1. Limited 10-15 categories
+
+2. Read and put questions yourself.
+
+ --------------------------------------

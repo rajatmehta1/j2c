@@ -1,3 +1,13 @@
+1. First complete in English
+
+2. Host on AWS
+
+pending
+1. Related Questions
+
+2.
+
+---------------------------------------------
 1. Hosting - AWS or A2Hosting
 
 2. Elastic search svr deployment on AWS (index name -> J2C
