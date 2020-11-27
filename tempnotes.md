@@ -1,4 +1,5 @@
 CAP Theorem:
+
 In this lesson I am going to cover CAP Theorem.
 This is one of the most important theorems in distributed computing.
 So, what exactly is CAP Theorem?
@@ -12,6 +13,7 @@ So what does this consistency , availability and partitioning mean.
 Consistency : in a distributed system you have data stored on multiple machines. When an update, delete or insert is fired on some data the updates are made consistently across all the machines, thereby all the machines storing that data are in the same state. For e.g. if you are storing say feedback from a user on 3 boxes and if the user now adds a new feedback or review, the new feedback is copied across all the 3 boxes at the same time and there is no time lag between the updates across all the boxes.
 Next lets talk about Availability.
 Availability : as the name suggest means the distributed system is available. In a distributed system we have multiple machines and if few machines fail and the system is still up that means its highly available and is able to run despite having failures.
+
 Partitioning: is a very important concept for a distributed system. Basically the amount of data is so huge that it might not fit on the disk of a single machine and thereby the data is broken into chunks and then these chunks are stored across multiple machines. This helps the system to scale horizontally. That is to say you can add more machines in the system and the newer machines can become part of these partitions and start sharing more data thereby the system becomes more scalable.
 ------
 
